@@ -1,19 +1,17 @@
 package bookmark.controllers;
 
-import bookmark.model.BookMark;
+import bookmark.dao.FileDaoDelegate;
+import bookmark.model.BookMarkForm;
 
 public class BookmarkController {
 	
-	public BookmarkController(BookMark bookmark) {
+	
+	FileDaoDelegate delegate = new FileDaoDelegate();
+	
+	
+	public void addBookMark(BookMarkForm bookmark){
 		
-		this.bookmark = bookmark;
-	}
-
-	BookMark bookmark;
-	
-	
-	
-	public void addBookMark(){
+		delegate.saveBookmarks(bookmark);
 		
 	}
 
