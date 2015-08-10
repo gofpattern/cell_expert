@@ -27,6 +27,7 @@ public class AwtControlDemo {
 	private Button addBookMarkBtn;
 	private Button bookmarkSaveBtn;
 	private List<BookMarkForm> bookmarkList; 
+	BookmarkController bookmarkCtrl;
 
 	public AwtControlDemo() {
 		prepareGUI();
@@ -83,9 +84,13 @@ public class AwtControlDemo {
 			}
 
 			private List<BookMarkForm> getBookMarksList() {
-				//bookmarkList  = 
-				if(bookmarkList == null)
-				bookmarkList = new ArrayList<BookMarkForm>();
+				
+				if(bookmarkList == null){
+					bookmarkList  = bookmarkCtrl.loadBookMarks();
+					if(bookmarkList==null)
+					bookmarkList = new ArrayList<BookMarkForm>();
+				}
+				
 				return bookmarkList;
 				
 			}
@@ -95,7 +100,7 @@ public class AwtControlDemo {
 		bookmarkSaveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// call the controller to delegate work
-				BookmarkController bookmarkCtrl = new BookmarkController();
+				bookmarkCtrl = new BookmarkController();
 				bookmarkCtrl.addBookMark(bookmarkList);
 				mainFrame.setVisible(true); //refreshing/resetting the window
 			}
