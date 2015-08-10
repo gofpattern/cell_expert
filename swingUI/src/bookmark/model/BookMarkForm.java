@@ -37,6 +37,7 @@ public class BookMarkForm extends Panel implements BookMark {
 		this.add(bookmarkNameText);
 		this.add(bookmarkUrlLabel);
 		this.add(bookmarkUrlText);
+		
 
 	}
 
@@ -59,8 +60,9 @@ public class BookMarkForm extends Panel implements BookMark {
 	}
 
 	public void addTo(JPanel controlPanel) {
-		
+		 //nookmark name on the window
 		 controlPanel.add(new Button(this.getBookmarkNameText().getText()),BorderLayout.EAST);
+		 //Bookmark location field on window
          controlPanel.add(new JTextField(this.getBookmarkUrlText().getText()),BorderLayout.EAST);
 
 	}

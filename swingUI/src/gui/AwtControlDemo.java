@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +26,7 @@ public class AwtControlDemo {
 	BookMarkForm bookmarkForm;
 	private Button addBookMarkBtn;
 	private Button bookmarkSaveBtn;
+	private List<BookMarkForm> bookmarkList; 
 
 	public AwtControlDemo() {
 		prepareGUI();
@@ -73,8 +76,18 @@ public class AwtControlDemo {
 				boolean ok = bookmarkForm.showForm();
 				if (ok){
 				bookmarkForm.addTo(bookMarkPanel);
+				bookmarkList = getBookMarksList();
+				bookmarkList.add(bookmarkForm);
 				mainFrame.setVisible(true); //refreshing/resetting the window
 				}
+			}
+
+			private List<BookMarkForm> getBookMarksList() {
+				//bookmarkList  = 
+				if(bookmarkList == null)
+				bookmarkList = new ArrayList<BookMarkForm>();
+				return bookmarkList;
+				
 			}
 		});
 		
@@ -83,7 +96,7 @@ public class AwtControlDemo {
 			public void actionPerformed(ActionEvent e) {
 				// call the controller to delegate work
 				BookmarkController bookmarkCtrl = new BookmarkController();
-				bookmarkCtrl.addBookMark(bookmarkForm);
+				bookmarkCtrl.addBookMark(bookmarkList);
 				mainFrame.setVisible(true); //refreshing/resetting the window
 			}
 		});

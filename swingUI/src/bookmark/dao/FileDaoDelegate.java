@@ -3,6 +3,8 @@ package bookmark.dao;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import bookmark.model.BookMarkBean;
@@ -11,17 +13,23 @@ import bookmark.model.BookMarkForm;
 public class FileDaoDelegate implements BookMarkDao {
 
 	public void saveBookmarks(BookMarkForm bookmark) {
+		BookMarkBean bookmarkBean = getBookMarkBean(bookmark);
+		List<BookMarkBean> beanList = new ArrayList<BookMarkBean>();
+		beanList.add(bookmarkBean);
+		saveToFile(beanList);
+
+	}
+
+	private BookMarkBean getBookMarkBean(BookMarkForm bookmark) {
 		String name = bookmark.getBookmarkNameText().getText();
 		String url = bookmark.getBookmarkUrlText().getText();
 		BookMarkBean bookmarkBean = new BookMarkBean();
 		bookmarkBean.setBookMark(name);
 		bookmarkBean.setBookMarkUrl(url);
-
-		saveToFile(bookmarkBean);
-
+		return bookmarkBean;
 	}
 
-	private void saveToFile(BookMarkBean bookmarkBean) {
+	private void saveToFile(List<BookMarkBean> bookmarkList) {
 
 		Properties prop = new Properties();
 		OutputStream output = null;
@@ -30,8 +38,11 @@ public class FileDaoDelegate implements BookMarkDao {
 
 			output = new FileOutputStream("config.properties");
 
-			// set the properties value
-			prop.setProperty(bookmarkBean.getBookMark(), bookmarkBean.getBookMarkUrl());
+			for (BookMarkBean bookmarkBean : bookmarkList) {
+
+				// set the properties value
+				prop.setProperty(bookmarkBean.getBookMark(), bookmarkBean.getBookMarkUrl());
+			}
 			// save properties to project root folder
 			prop.store(output, null);
 
@@ -48,5 +59,19 @@ public class FileDaoDelegate implements BookMarkDao {
 
 		}
 
+	}
+
+	public void saveBookmarks(List<BookMarkForm> bookmarkFormList) {
+
+		List<BookMarkBean> bookmarkList = new ArrayList<BookMarkBean>();
+		for (BookMarkForm form : bookmarkFormList) {
+			bookmarkList.add(getBookMarkBean(form));
+		}
+		saveToFile(bookmarkList);
+
+	}
+	
+	public void loadBookmarks(){
+		
 	}
 }
