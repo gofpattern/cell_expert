@@ -25,7 +25,7 @@ public class AwtControlDemo {
    }
 
    private void prepareGUI(){
-      mainFrame = new Frame("Java AWT Examples");
+      mainFrame = new Frame("Book Mark Application");
       mainFrame.setSize(400,400);
       mainFrame.setLayout(new GridLayout(3, 1));
       mainFrame.addWindowListener(new WindowAdapter() {
