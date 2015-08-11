@@ -27,7 +27,7 @@ public class AwtControlDemo {
 	private Button addBookMarkBtn;
 	private Button bookmarkSaveBtn;
 	private List<BookMarkForm> bookmarkList; 
-	BookmarkController bookmarkCtrl;
+	private BookmarkController bookmarkCtrl;
 
 	public AwtControlDemo() {
 		prepareGUI();
@@ -86,6 +86,7 @@ public class AwtControlDemo {
 			private List<BookMarkForm> getBookMarksList() {
 				
 				if(bookmarkList == null){
+					bookmarkCtrl = new BookmarkController();
 					bookmarkList  = bookmarkCtrl.loadBookMarks();
 					if(bookmarkList==null)
 					bookmarkList = new ArrayList<BookMarkForm>();

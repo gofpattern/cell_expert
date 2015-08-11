@@ -1,9 +1,12 @@
 package bookmark.dao;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -72,6 +75,37 @@ public class FileDaoDelegate implements BookMarkDao {
 	}
 	
 	public void loadBookmarks(){
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream("config.properties");
+
+			// load a properties file
+			prop.load(input);
+			
+			Enumeration<?> e = prop.propertyNames();
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String value = prop.getProperty(key);
+				System.out.println("Key : " + key + ", Value : " + value);
+			}
+
+			
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
 	}
 }
