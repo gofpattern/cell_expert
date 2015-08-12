@@ -22,8 +22,8 @@ public class BookmarkController {
 	}
 
 	public List<BookMarkForm> loadBookMarks() {
-		delegate.loadBookmarks();
-		return null;
+		return delegate.loadBookmarks();
+		
 	}
 
 }

@@ -106,9 +106,26 @@ public class AwtControlDemo {
 				mainFrame.setVisible(true); //refreshing/resetting the window
 			}
 		});
+		
+		List<BookMarkForm> forms = getBookMarks();
+		if(forms!=null)
+		for(BookMarkForm form: forms)
+		{
+			form.addTo(bookMarkPanel);
+		}
 
 		controlPanel.add(bookmarkSaveBtn);
 		controlPanel.add(addBookMarkBtn);
 		mainFrame.setVisible(true);
+	}
+
+	private List<BookMarkForm> getBookMarks() {
+		bookmarkCtrl = new BookmarkController();
+		bookmarkList  = bookmarkCtrl.loadBookMarks();
+		if(bookmarkList!=null && bookmarkList.size()>0){
+			return bookmarkList;
+		}
+		
+		return null;
 	}
 }

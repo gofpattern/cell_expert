@@ -40,6 +40,17 @@ public class BookMarkForm extends Panel implements BookMark {
 		
 
 	}
+	
+	//setters
+	//not a bean setter.'todo
+	public void setBookmarkNameText(String bookmarkNameStr) {
+		this.bookmarkNameText.setText(bookmarkNameStr); 
+	}
+
+	public void setBookmarkUrlText(String bookmarkUrlStr ) {
+		this.bookmarkUrlText.setText(bookmarkUrlStr);
+	}
+
 
 	// Getters
 
@@ -60,7 +71,7 @@ public class BookMarkForm extends Panel implements BookMark {
 	}
 
 	public void addTo(JPanel controlPanel) {
-		 //nookmark name on the window
+		 //bookmark name on the window
 		 controlPanel.add(new Button(this.getBookmarkNameText().getText()),BorderLayout.EAST);
 		 //Bookmark location field on window
          controlPanel.add(new JTextField(this.getBookmarkUrlText().getText()),BorderLayout.EAST);

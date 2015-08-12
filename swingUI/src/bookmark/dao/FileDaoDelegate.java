@@ -74,9 +74,10 @@ public class FileDaoDelegate implements BookMarkDao {
 
 	}
 	
-	public void loadBookmarks(){
+	public List<BookMarkForm> loadBookmarks(){
 		
 		Properties prop = new Properties();
+		List<BookMarkForm> listForms = new ArrayList<BookMarkForm>();
 		InputStream input = null;
 
 		try {
@@ -91,7 +92,13 @@ public class FileDaoDelegate implements BookMarkDao {
 				String key = (String) e.nextElement();
 				String value = prop.getProperty(key);
 				System.out.println("Key : " + key + ", Value : " + value);
+				BookMarkForm form = new BookMarkForm();
+				form.setBookmarkNameText(key);
+				form.setBookmarkUrlText(value);
+				listForms.add(form);
 			}
+			
+			
 
 			
 
@@ -106,6 +113,7 @@ public class FileDaoDelegate implements BookMarkDao {
 				}
 			}
 		}
+		return listForms;
 		
 	}
 }
