@@ -1,6 +1,7 @@
 package bookmark.dao;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,8 @@ import bookmark.model.BookMarkBean;
 import bookmark.model.BookMarkForm;
 
 public class FileDaoDelegate implements BookMarkDao {
+	
+	static Properties cachedProps;
 
 	public void saveBookmarks(BookMarkForm bookmark) {
 		BookMarkBean bookmarkBean = getBookMarkBean(bookmark);
@@ -44,7 +47,8 @@ public class FileDaoDelegate implements BookMarkDao {
 			for (BookMarkBean bookmarkBean : bookmarkList) {
 
 				// set the properties value
-				prop.setProperty(bookmarkBean.getBookMark(), bookmarkBean.getBookMarkUrl());
+				prop.setProperty(bookmarkBean.getBookMark(),
+						bookmarkBean.getBookMarkUrl());
 			}
 			// save properties to project root folder
 			prop.store(output, null);
@@ -73,9 +77,9 @@ public class FileDaoDelegate implements BookMarkDao {
 		saveToFile(bookmarkList);
 
 	}
-	
-	public List<BookMarkForm> loadBookmarks(){
-		
+
+	public List<BookMarkForm> loadBookmarks() {
+
 		Properties prop = new Properties();
 		List<BookMarkForm> listForms = new ArrayList<BookMarkForm>();
 		InputStream input = null;
@@ -86,7 +90,8 @@ public class FileDaoDelegate implements BookMarkDao {
 
 			// load a properties file
 			prop.load(input);
-			
+			fillCache(prop);
+
 			Enumeration<?> e = prop.propertyNames();
 			while (e.hasMoreElements()) {
 				String key = (String) e.nextElement();
@@ -97,10 +102,6 @@ public class FileDaoDelegate implements BookMarkDao {
 				form.setBookmarkUrlText(value);
 				listForms.add(form);
 			}
-			
-			
-
-			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -114,6 +115,112 @@ public class FileDaoDelegate implements BookMarkDao {
 			}
 		}
 		return listForms;
+
+	}
+
+	private void fillCache(Properties props) {
+		
+		if(cachedProps == null){
+			
+			cachedProps= props;
+		}
+		
+	}
+
+	
+
+	// to get the URL for specific button
+	//TODO: use a cache mechanism to improve the coding standard.
+	public static String getUrl(String key) {
+
+		String url = null;
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream("config.properties");
+
+			// load a properties file
+			prop.load(input);
+
+			url = prop.getProperty(key);
+		}
+
+		catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return url;
+
+	}
+	
+	public static String deleteUrl(String key) {
+
+		String url = null;
+		Properties prop = new Properties();
+		InputStream input = null;
+		FileOutputStream output = null;
+
+		try {
+
+			input = new FileInputStream("config.properties");
+			
+
+			// load a properties file
+			prop = getCachedProps();
+			prop.remove(key);
+			
+		}
+
+		catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return url;
+
+	}
+	
+	public static Properties getCachedProps(){
+		
+		if(cachedProps != null)
+			
+			return cachedProps;
+		else
+		{
+			System.out.println("Warning: The Cached properties is empty");	
+			return cachedProps;
+		}
+		
+		
+	}
+
+	public static void save() {
+		
+		Properties props = getCachedProps();
+		OutputStream output = null;
+		try {
+			output = new FileOutputStream("config.properties");		
+			props.store(output,null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 }

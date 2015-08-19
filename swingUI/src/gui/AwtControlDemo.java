@@ -11,11 +11,13 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import bookmark.controllers.BookmarkController;
+import bookmark.dao.FileDaoDelegate;
 import bookmark.model.BookMarkForm;
 
 public class AwtControlDemo {
@@ -24,8 +26,8 @@ public class AwtControlDemo {
 	private JPanel controlPanel;
 	private JPanel bookMarkPanel;
 	BookMarkForm bookmarkForm;
-	private Button addBookMarkBtn;
-	private Button bookmarkSaveBtn;
+	private JButton addBookMarkBtn;
+	private JButton bookmarkSaveBtn;
 	private List<BookMarkForm> bookmarkList; 
 	private BookmarkController bookmarkCtrl;
 
@@ -40,11 +42,12 @@ public class AwtControlDemo {
 
 	private void prepareGUI() {
 		mainFrame = new JFrame("BookMark Application");
-		mainFrame.setSize(400, 300);
+		mainFrame.setSize(1024, 768);
 		mainFrame.setLayout(new BorderLayout());
 		//main window controller/Listener
 		mainFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
+				FileDaoDelegate.save();
 				System.exit(0); // do nothing just exit out at closing
 			}
 		});
@@ -56,7 +59,7 @@ public class AwtControlDemo {
 		
 		mainFrame.add(controlPanel,BorderLayout.SOUTH);
 		bookMarkPanel = new JPanel();
-		bookMarkPanel.setLayout(new GridLayout(0,2));
+		bookMarkPanel.setLayout(new GridLayout(0,3));
 		JScrollPane scrollBookmark = new JScrollPane(bookMarkPanel); //
 		mainFrame.getContentPane().add(scrollBookmark,BorderLayout.NORTH);
 		
@@ -65,8 +68,8 @@ public class AwtControlDemo {
 
 	private void showTextFieldDemo() {
 		
-		addBookMarkBtn = new Button("Add New Bookmark");
-		bookmarkSaveBtn = new Button("Save BookMark");
+		addBookMarkBtn = new JButton("Add New Bookmark");
+		bookmarkSaveBtn = new JButton("Save BookMark");
 		// attach listener to Bookmark button
 		addBookMarkBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

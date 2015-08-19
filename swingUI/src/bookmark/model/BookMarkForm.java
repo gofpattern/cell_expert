@@ -2,12 +2,19 @@ package bookmark.model;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Component;
 import java.awt.Panel;
 
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import bookmark.controllers.BookMarkBtnListener;
+import bookmark.controllers.BookMarkDeleteBtnListener;
+
 
 /**
  * This class serve as form to collect the data from the user. For now its tightly coupled but as I go along the way, I will keep making it loosely coupled and configureable
@@ -72,7 +79,14 @@ public class BookMarkForm extends Panel implements BookMark {
 
 	public void addTo(JPanel controlPanel) {
 		 //bookmark name on the window
-		 controlPanel.add(new Button(this.getBookmarkNameText().getText()),BorderLayout.EAST);
+		 JButton bookmarkNameBtn = new JButton(this.getBookmarkNameText().getText());
+		 //delete button for book mark deletion	 
+		 JButton delete = new JButton("Delete"); 
+		 delete.setActionCommand(this.getBookmarkNameText().getText());
+		 delete.addActionListener(new BookMarkDeleteBtnListener());
+		 controlPanel.add(delete,BorderLayout.EAST);
+		 bookmarkNameBtn.addActionListener(new BookMarkBtnListener());
+		 controlPanel.add(bookmarkNameBtn,BorderLayout.EAST);
 		 //Bookmark location field on window
          controlPanel.add(new JTextField(this.getBookmarkUrlText().getText()),BorderLayout.EAST);
 

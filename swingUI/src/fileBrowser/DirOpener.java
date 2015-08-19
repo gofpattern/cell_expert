@@ -13,7 +13,20 @@ public class DirOpener {
 	        // uses the corect path separator for the OS
 	        String folder = "\\NCSF-eclipse\\NCSF";
 	        File dir = new File(userHome,folder);
+	        try
+	        {
 	        Desktop.getDesktop().open(dir);
+	        }
+	        
+	       catch(IllegalArgumentException e)
+	       {
+	    	  System.out.println("Warning: "+ e.getMessage());
+	    	  
+	       }
+	        finally{
+	        	
+	        }
+	        Runtime.getRuntime().exec("cmd.exe /c start");
 	    }
 	}
 
