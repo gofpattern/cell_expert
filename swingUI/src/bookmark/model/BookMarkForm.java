@@ -3,6 +3,8 @@ package bookmark.model;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Panel;
 
 import javax.swing.Action;
@@ -77,18 +79,19 @@ public class BookMarkForm extends Panel implements BookMark {
 		return bookmarkUrlLabel;
 	}
 
-	public void addTo(JPanel controlPanel) {
+	public void addTo(JPanel bookMarkPanel) {
 		 //bookmark name on the window
 		 JButton bookmarkNameBtn = new JButton(this.getBookmarkNameText().getText());
 		 //delete button for book mark deletion	 
 		 JButton delete = new JButton("Delete"); 
+		 delete.setPreferredSize(new Dimension(100,25));
 		 delete.setActionCommand(this.getBookmarkNameText().getText());
 		 delete.addActionListener(new BookMarkDeleteBtnListener());
-		 controlPanel.add(delete,BorderLayout.EAST);
+		 bookMarkPanel.add(delete);
 		 bookmarkNameBtn.addActionListener(new BookMarkBtnListener());
-		 controlPanel.add(bookmarkNameBtn,BorderLayout.EAST);
+		 bookMarkPanel.add(bookmarkNameBtn);
 		 //Bookmark location field on window
-         controlPanel.add(new JTextField(this.getBookmarkUrlText().getText()),BorderLayout.EAST);
+		 bookMarkPanel.add(new JTextField(this.getBookmarkUrlText().getText()));
 
 	}
 

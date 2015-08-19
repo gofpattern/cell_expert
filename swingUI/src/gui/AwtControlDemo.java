@@ -25,6 +25,7 @@ public class AwtControlDemo {
 	private JFrame mainFrame;
 	private JPanel controlPanel;
 	private JPanel bookMarkPanel;
+	private JPanel editPanel;
 	BookMarkForm bookmarkForm;
 	private JButton addBookMarkBtn;
 	private JButton bookmarkSaveBtn;
@@ -60,8 +61,13 @@ public class AwtControlDemo {
 		mainFrame.add(controlPanel,BorderLayout.SOUTH);
 		bookMarkPanel = new JPanel();
 		bookMarkPanel.setLayout(new GridLayout(0,3));
+		//editPanel
+		
+		mainFrame.add(bookMarkPanel);
+				
 		JScrollPane scrollBookmark = new JScrollPane(bookMarkPanel); //
 		mainFrame.getContentPane().add(scrollBookmark,BorderLayout.NORTH);
+		
 		
 		mainFrame.setVisible(true);
 	}
