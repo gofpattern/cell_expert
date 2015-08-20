@@ -37,7 +37,7 @@ public class FileDaoDelegate implements BookMarkDao {
 
 	private void saveToFile(List<BookMarkBean> bookmarkList) {
 
-		Properties prop = new Properties();
+		Properties prop = getCachedProps();
 		OutputStream output = null;
 
 		try {
@@ -122,7 +122,7 @@ public class FileDaoDelegate implements BookMarkDao {
 		
 		if(cachedProps == null){
 			
-			cachedProps= props;
+			cachedProps= props;//initializes
 		}
 		
 	}
@@ -214,7 +214,8 @@ public class FileDaoDelegate implements BookMarkDao {
 		Properties props = getCachedProps();
 		OutputStream output = null;
 		try {
-			output = new FileOutputStream("config.properties");		
+			output = new FileOutputStream("config.properties");
+		
 			props.store(output,null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
