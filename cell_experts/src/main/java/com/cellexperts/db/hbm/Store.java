@@ -13,7 +13,7 @@ public class Store implements java.io.Serializable {
 	private Integer storeId;
 	private String city;
 	private String storeNm;
-	private Set employeeses = new HashSet(0);
+	private Set<Employees> employeeses = new HashSet<Employees>(0);
 
 	public Store() {
 	}

@@ -1,5 +1,8 @@
 package com.cellexperts.db.hbm;
 
+import java.util.HashSet;
+import java.util.Hashtable;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,13 +42,26 @@ public class Driver {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		Integer employeeID = null;
+		Integer storeID = null;
 		try {
 			tx = session.beginTransaction();
 			Employees emp = new Employees("aaqib", "rehman", null, null,
 					"gofpattern@gmail.com", null, "31 N Street, Allentown",
 					null, null);
+			//assign employees to store
+			HashSet<Store> storeSet = new HashSet<Store>();
+			
+			Store store = new Store("Reading","Cell Expert Systems",null);
+			storeSet.add(store);
+			emp.setStores(storeSet);
+			//indpendent tables
 			employeeID = (Integer) session.save(emp);
+			storeID = (Integer) session.save(store);
 			tx.commit();
+			///////////////////
+			
+			
+			
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
