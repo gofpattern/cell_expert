@@ -1,6 +1,6 @@
 package com.cellexperts.db.hbm;
 
-// Generated Sep 3, 2015 2:22:26 PM by Hibernate Tools 3.4.0.CR1
+// Generated Sep 9, 2015 10:52:46 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +13,6 @@ public class EmployeeTimesheet implements java.io.Serializable {
 	private EmployeeTimesheetId id;
 	private Employees employees;
 	private Boolean submitted;
-	private String employeeTimesheetcol;
-	private String employeeTimesheetcol1;
 	private Set dailyTimesheetDtlses = new HashSet(0);
 
 	public EmployeeTimesheet() {
@@ -26,13 +24,10 @@ public class EmployeeTimesheet implements java.io.Serializable {
 	}
 
 	public EmployeeTimesheet(EmployeeTimesheetId id, Employees employees,
-			Boolean submitted, String employeeTimesheetcol,
-			String employeeTimesheetcol1, Set dailyTimesheetDtlses) {
+			Boolean submitted, Set dailyTimesheetDtlses) {
 		this.id = id;
 		this.employees = employees;
 		this.submitted = submitted;
-		this.employeeTimesheetcol = employeeTimesheetcol;
-		this.employeeTimesheetcol1 = employeeTimesheetcol1;
 		this.dailyTimesheetDtlses = dailyTimesheetDtlses;
 	}
 
@@ -58,22 +53,6 @@ public class EmployeeTimesheet implements java.io.Serializable {
 
 	public void setSubmitted(Boolean submitted) {
 		this.submitted = submitted;
-	}
-
-	public String getEmployeeTimesheetcol() {
-		return this.employeeTimesheetcol;
-	}
-
-	public void setEmployeeTimesheetcol(String employeeTimesheetcol) {
-		this.employeeTimesheetcol = employeeTimesheetcol;
-	}
-
-	public String getEmployeeTimesheetcol1() {
-		return this.employeeTimesheetcol1;
-	}
-
-	public void setEmployeeTimesheetcol1(String employeeTimesheetcol1) {
-		this.employeeTimesheetcol1 = employeeTimesheetcol1;
 	}
 
 	public Set getDailyTimesheetDtlses() {

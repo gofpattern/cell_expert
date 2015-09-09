@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 3, 2015 2:22:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Sep 9, 2015 10:52:46 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cellexperts.db.hbm.Store" table="store" catalog="cell_experts">
         <id name="storeId" type="java.lang.Integer">

@@ -14,5 +14,9 @@
 		<!-- List of XML mapping files -->
 		 <!-- <mapping class="com.cellexperts.db.hbm.Employees"/> -->
 		<mapping resource="com/cellexperts/db/hbm/Employees.hbm.xml" />
+		<mapping resource="com/cellexperts/db/hbm/EmployeeTimesheet.hbm.xml" />
+		<mapping resource="com/cellexperts/db/hbm/DailyTimesheetDtls.hbm.xml" />
+		<mapping resource="com/cellexperts/db/hbm/Store.hbm.xml" />
+		
 	</session-factory>
 </hibernate-configuration>

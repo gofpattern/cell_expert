@@ -1,6 +1,6 @@
 package com.cellexperts.db.hbm;
 
-// Generated Sep 3, 2015 2:22:26 PM by Hibernate Tools 3.4.0.CR1
+// Generated Sep 9, 2015 10:52:46 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,7 @@ public class Store implements java.io.Serializable {
 	private Integer storeId;
 	private String city;
 	private String storeNm;
-	private Set<Employees> employeeses = new HashSet<Employees>(0);
+	private Set employeeses = new HashSet(0);
 
 	public Store() {
 	}
